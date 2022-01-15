@@ -4,7 +4,9 @@ import psycopg2
 
 DB_URL = os.environ.get("DATABASE_URL", "dbname=flask_app")
 
+SECRET_KEY = os.environ.get("SECRET_KEY", "password")
 app = Flask(__name__)
+app.config['SECRET_KEY'] = SECRET_KEY
 
 
 @app.route('/')
