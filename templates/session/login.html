@@ -1,0 +1,20 @@
+{% extends "base.html" %} {% block content %}
+<div className="signup-login"></div>
+<form action="/sessions/create" method="POST">
+    {% if error %}
+    <div class="error">{{error}}</div>
+    {% endif %}
+    <h2>Login</h2>
+    <div>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="text" />
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" />
+    </div>
+    <div>
+        <button type="submit">Login</button>
+    </div>
+</form>
+{% endblock content %}

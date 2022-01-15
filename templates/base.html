@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Your-Smart-Fridge</title>
+        <link rel="stylesheet" href="/static/style.css" />
+    </head>
+    <body>
+        <header>
+            <h1>Your-Smart-Fridge</h1>
+            <nav>
+                <div>
+                    <a href="/">Home</a>
+                </div>
+                <div>
+                    <a href="/ingredients">ingredients</a>
+                </div>
+                {% if session.get('user_id') %}
+                <div>Welcome, {{session.get('user_name')}}</div>
+                <div>
+                    <a href="/sessions/destroy">Logout</a>
+                </div>
+                {% else %}
+                <div>
+                    <a href="/login">Login</a>
+                </div>
+                <div>
+                    <a href="/signup">Sign up</a>
+                </div>
+                {% endif %}
+            </nav>
+        </header>
+        <main>{% block content %}{% endblock content%}</main>
+        <footer>
+            <section>
+                <h4></h4>
+            </section>
+            <section>
+                <h4>Contact us</h4>
+                yoursmartfridge@info.io
+            </section>
+        </footer>
+    </body>
+</html>
