@@ -1,3 +1,6 @@
+from datetime import date
+
+
 import database
 # All Database functionality relating to our fridge
 
@@ -50,8 +53,8 @@ def delete_ingredients(id):
     database.sql_write("DELETE FROM ingredients  WHERE id = %s", [id])
 
 
-def get_expired_ingredients(id):
+def get_expired_ingredients():
+    today = date.today()
     results = database.sql_select(
-        'SELECT * FROM ingredients WHERE expiry_date =  2022-01-16', [id])
-    results = results[0]
+        "SELECT * FROM ingredients WHERE expiry_date <= %s", [today])
     return results
