@@ -1,2 +1,26 @@
 <!-- form have name expiry date -->
 <!-- need models for fridge , ingredient.py -->
+
+{% extends 'base.html' %} {% block content %}
+<form method="post" action="/fridge">
+    <h2>Create smart fridge</h2>
+    <div>
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" />
+    </div>
+
+    <div>
+        <label for="purchased_date">Purchases date</label>
+        <input id="purchased_date" name="purchased_date" type="date" />
+    </div>
+
+    <div>
+        <label for="expiry_date">expiry date</label>
+        <input id="expiry_date" name="expiry_date" type="date" />
+    </div>
+
+    <div>
+        <button type="submit">Save</button>
+    </div>
+</form>
+{% endblock content %}

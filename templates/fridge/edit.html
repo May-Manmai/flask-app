@@ -1,0 +1,41 @@
+{% extends 'base.html' %} {% block content %}
+<form method="POST" action="/fridge/{{ingredient['id']}}">
+    <h2>Edit ingredient</h2>
+    <div>
+        <label for="name">Name</label>
+        <input
+            id="name"
+            name="name"
+            type="text"
+            value="{{ingredient['name']}}"
+        />
+    </div>
+
+    <div>
+        <label for="purchased_date">purchased_date</label>
+        <input
+            id="purchased_date"
+            name="purchased_date"
+            type="date"
+            value="{{ingredient['purchased_date']}}"
+        />
+    </div>
+
+    <div>
+        <label for="expiry_date">Expiry Date</label>
+        <input
+            id="expiry_date"
+            name="expiry_date"
+            type="date"
+            value="{{ingredient['expiry_date']}}"
+        />
+    </div>
+
+    <div>
+        <button type="submit">Save</button>
+    </div>
+</form>
+<form action="/fridge/{{ingredient['id']}}/delete" method="POST">
+    <button type="submit">Delete</button>
+</form>
+{% endblock content %}

@@ -1,6 +1,21 @@
 {% extends "base.html" %} {% block content %}
 
 <h1>Fridge Home</h1>
-<!-- list of all products button to add ingredient take to create.html -->
+
+<div>
+    <a href="/fridge/create">Add your ingredient</a>
+</div>
+{#fridge_items#}
+<section class="all-fridge">
+    {% for ingredient in fridge_items %}
+    <div class="fridge-items">
+        <div class="info">
+            <h2>{{ ingredient['name'] }}</h2>
+            <a href="/fridge/{{ingredient['id']}}">Show</a>
+            <a href="/fridge/{{ingredient['id']}}/edit">Edit</a>
+        </div>
+    </div>
+    {% endfor %}
+</section>
 
 {% endblock %}
