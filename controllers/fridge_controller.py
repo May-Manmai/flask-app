@@ -1,5 +1,6 @@
+from crypt import methods
 from flask import Blueprint, request, session, redirect, render_template
-from models.fridge import get_all_ingredients, get_ingredient, insert_ingredient, update_ingredients
+from models.fridge import get_all_ingredients, get_ingredient, insert_ingredient, update_ingredients, delete_ingredients
 
 fridge_controller = Blueprint(
     "fridge_controller", __name__, template_folder="../templates/fridge")
@@ -47,3 +48,15 @@ def update(id):
 def edit(id):
     ingredient = get_ingredient(id)
     return render_template('edit.html', ingredient=ingredient)
+
+
+@fridge_controller.route('/fridge/<id>', methods=["GET"])
+def show(id):
+    ingredient = get_ingredient(id)
+    return render_template('show.html', ingredient=ingredient)
+
+
+@fridge_controller.route('/fridge/<id>/delete', methods=["POST"])
+def delete(id):
+    delete_ingredients(id)
+    return redirect('/')

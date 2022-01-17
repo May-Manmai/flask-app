@@ -44,3 +44,14 @@ def update_ingredients(id, name, purchased_date, expiry_date):
         expiry_date,
         id,
     ])
+
+
+def delete_ingredients(id):
+    database.sql_write("DELETE FROM ingredients  WHERE id = %s", [id])
+
+
+def get_expired_ingredients(id):
+    results = database.sql_select(
+        'SELECT * FROM ingredients WHERE expiry_date =  2022-01-16', [id])
+    results = results[0]
+    return results
