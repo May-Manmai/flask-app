@@ -58,3 +58,10 @@ def get_expired_ingredients():
     results = database.sql_select(
         "SELECT * FROM ingredients WHERE expiry_date <= %s", [today])
     return results
+
+
+def get_not_expired_ingredients():
+    today = date.today()
+    results = database.sql_select(
+        "SELECT * FROM ingredients WHERE expiry_date > %s ORDER BY expiry_date ASC", [today])
+    return results

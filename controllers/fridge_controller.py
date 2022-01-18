@@ -1,6 +1,6 @@
 from crypt import methods
 from flask import Blueprint, request, session, redirect, render_template
-from models.fridge import get_all_ingredients, get_ingredient, insert_ingredient, update_ingredients, delete_ingredients, get_expired_ingredients
+from models.fridge import get_all_ingredients, get_ingredient, insert_ingredient, update_ingredients, delete_ingredients, get_expired_ingredients, get_not_expired_ingredients
 
 fridge_controller = Blueprint(
     "fridge_controller", __name__, template_folder="../templates/fridge")
@@ -8,7 +8,7 @@ fridge_controller = Blueprint(
 
 @fridge_controller.route('/fridge')
 def fridge():
-    fridge_items = get_all_ingredients()
+    fridge_items = get_not_expired_ingredients()
     bin_items = get_expired_ingredients()
 
     return render_template('index.html', fridge_items=fridge_items, bin_items=bin_items)
