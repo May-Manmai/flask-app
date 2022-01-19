@@ -12,12 +12,13 @@ import database
 # INSERT ingredients INTO DB
 
 
-def insert_ingredient(user_id, name, purchased_date, expiry_date):
-    database.sql_write("INSERT into ingredients  (user_id, name, purchased_date, expiry_date) VALUES (%s, %s, %s, %s);", [
+def insert_ingredient(user_id, name, purchased_date, expiry_date, image_url):
+    database.sql_write("INSERT into ingredients  (user_id, name, purchased_date, expiry_date, image_url) VALUES (%s, %s, %s, %s, %s);", [
         user_id,
         name,
         purchased_date,
-        expiry_date
+        expiry_date,
+        image_url
     ])
 
 # SELECT ingredient FROM DB to display and edit the ingredient
@@ -40,11 +41,12 @@ def get_all_ingredients():
 # UPDATE INGREDIENTS IN DB
 
 
-def update_ingredients(id, name, purchased_date, expiry_date):
-    database.sql_write("UPDATE ingredients set name = %s, purchased_date = %s, expiry_date = %s WHERE id = %s", [
+def update_ingredients(id, name, purchased_date, expiry_date, image_url):
+    database.sql_write("UPDATE ingredients set name = %s, purchased_date = %s, expiry_date = %s, image_url= %s WHERE id = %s", [
         name,
         purchased_date,
         expiry_date,
+        image_url,
         id,
     ])
 

@@ -1,6 +1,10 @@
 from crypt import methods
 from flask import Blueprint, request, session, redirect, render_template
 from models.fridge import get_all_ingredients, get_ingredient, insert_ingredient, update_ingredients, delete_ingredients, get_expired_ingredients, get_not_expired_ingredients
+import os
+import requests
+
+SPOONACULAR_KEY = os.environ.get("SPOONACULAR_KEY", "")
 
 fridge_controller = Blueprint(
     "fridge_controller", __name__, template_folder="../templates/fridge")
@@ -21,12 +25,24 @@ def create():
 
 @fridge_controller.route('/fridge', methods=["POST"])
 def insert():
+    ingredient_name = request.form.get('name')
+    url = f'https://api.spoonacular.com/food/ingredients/search?query={ingredient_name}&apiKey={SPOONACULAR_KEY}'
+    print(url)
+    image_response = requests.get(url)
+    image_info = image_response.json()
+    if image_info["results"] == []:
+        spoonacular_url = f'https://spoonacular.com/cdn/ingredients_50x50/null.jpg'
+    else:
+        spoonacular_url = f'https://spoonacular.com/cdn/ingredients_100x100/{image_info["results"][0]["image"]}'
+    print(image_info)
     # INSERT INTO DB
     insert_ingredient(
         session.get("user_id"),
         request.form.get("name"),
         request.form.get("purchased_date"),
         request.form.get("expiry_date"),
+        spoonacular_url,
+        # get image url grab the first result
     )
 
     return redirect('/')
@@ -34,11 +50,22 @@ def insert():
 
 @fridge_controller.route('/fridge/<id>', methods=["POST"])
 def update(id):
+    ingredient_name = request.form.get('name')
+    url = f'https://api.spoonacular.com/food/ingredients/search?query={ingredient_name}&apiKey={SPOONACULAR_KEY}'
+    print(url)
+    image_response = requests.get(url)
+    image_info = image_response.json()
+    if image_info["results"] == []:
+        spoonacular_url = f'https://spoonacular.com/cdn/ingredients_50x50/null.jpg'
+    else:
+        spoonacular_url = f'https://spoonacular.com/cdn/ingredients_100x100/{image_info["results"][0]["image"]}'
+    print(image_info["results"])
     update_ingredients(
         id,
         request.form.get("name"),
         request.form.get("purchased_date"),
         request.form.get("expiry_date"),
+        spoonacular_url,
 
     )
 
@@ -61,10 +88,3 @@ def show(id):
 def delete(id):
     delete_ingredients(id)
     return redirect('/')
-
-
-# @fridge_controller.route('/bin')
-# def bin():
-#     bin_items = get_expired_ingredients()
-
-#     return render_template('bin.html', bin_items=bin_items)
