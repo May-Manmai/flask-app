@@ -3,9 +3,10 @@ import bcrypt
 
 
 def insert_user(name, email, password):
-    password = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
-    database.sql_write("INSERT INTO users (name, email, password)" +
-                       " VALUES(%s, %s, %s)", [name, email, password])
+    if name != "" and email != "":
+        password = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+        database.sql_write("INSERT INTO users (name, email, password)" +
+                           " VALUES(%s, %s, %s)", [name, email, password])
 
 
 def get_user_by_id(id):
@@ -22,6 +23,3 @@ def get_user_by_email(email):
         return results[0]
     else:
         return None
-
-
-

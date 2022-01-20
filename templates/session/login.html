@@ -6,15 +6,33 @@
     {% endif %}
     <h2>Login</h2>
     <div>
-        <label for="email">Email</label>
-        <input id="email" name="email" type="text" />
+        <div class="input-container">
+            <i class="fa fa-envelope icon"></i>
+            <label for="email"></label>
+            <input
+                class="input-field"
+                id="email"
+                name="email"
+                type="text"
+                placeholder="Email"
+            />
+        </div>
     </div>
     <div>
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password" />
+        <div class="input-container">
+            <i class="fa fa-key icon"></i>
+            <label for="password"></label>
+            <input
+                class="input-field"
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Password"
+            />
+        </div>
     </div>
     <div>
-        <button type="submit">Login</button>
+        <button class="login-btn" type="submit">Login</button>
     </div>
 </form>
 {% endblock content %}
