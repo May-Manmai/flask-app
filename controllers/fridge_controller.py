@@ -12,8 +12,9 @@ fridge_controller = Blueprint(
 
 @fridge_controller.route('/fridge')
 def fridge():
-    fridge_items = get_not_expired_ingredients()
-    bin_items = get_expired_ingredients()
+    user_id = session.get("user_id")
+    fridge_items = get_not_expired_ingredients(user_id)
+    bin_items = get_expired_ingredients(user_id)
 
     return render_template('index.html', fridge_items=fridge_items, bin_items=bin_items)
 
@@ -42,7 +43,6 @@ def insert():
         request.form.get("purchased_date"),
         request.form.get("expiry_date"),
         spoonacular_url,
-        # get image url grab the first result
     )
 
     return redirect('/')

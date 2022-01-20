@@ -1,5 +1,5 @@
 from datetime import date
-
+from flask import session
 
 import database
 # All Database functionality relating to our fridge
@@ -55,15 +55,15 @@ def delete_ingredients(id):
     database.sql_write("DELETE FROM ingredients  WHERE id = %s", [id])
 
 
-def get_expired_ingredients():
+def get_expired_ingredients(user_id):
     today = date.today()
     results = database.sql_select(
-        "SELECT * FROM ingredients WHERE expiry_date <= %s", [today])
+        "SELECT * FROM ingredients WHERE user_id = %s and expiry_date <= %s", [user_id, today])
     return results
 
 
-def get_not_expired_ingredients():
+def get_not_expired_ingredients(user_id):
     today = date.today()
     results = database.sql_select(
-        "SELECT * FROM ingredients WHERE expiry_date > %s ORDER BY expiry_date ASC", [today])
+        "SELECT * FROM ingredients WHERE user_id = %s and expiry_date > %s ORDER BY expiry_date ASC", [user_id, today])
     return results
