@@ -1,68 +1,94 @@
 {% extends "base.html" %} {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+    <h1>Fridge Home</h1>
 
-<h1>Fridge Home</h1>
+    <div>
+        <a href="/fridge/create">Add your ingredient</a>
+    </div>
+    <h3>They are ready to cook!</h3>
+    <h4>Please select ingredients below to check recipes</h4>
+    {#fridge_items#}
+    <section class="all-fridge">
+        <div class="form-check">
+            <form action="/fridge">
+                {% for ingredient in fridge_items %}
+                <div class="fridge-items">
+                    <div class="info">
+                        <h2>{{ ingredient['name'] }}</h2>
+                        <div class="checkbox_section">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="id_{{ ingredient['name'] }}"
+                                name="selected_ingredients"
+                                value="{{ ingredient['name'] }}"
+                            />
+                            <label for="{{ ingredient['name'] }}">
+                            </label>
+                            <br />
+                        </div>
 
-<div>
-    <a href="/fridge/create">Add your ingredient</a>
-</div>
-<h3>They are ready to cook!</h3>
-{#fridge_items#}
-<section class="all-fridge">
-    <form action="/fridge">
-        {% for ingredient in fridge_items %}
+                        
+                        <img
+                            width="100"
+                            src="{{ingredient['image_url']}}"
+                            alt=""
+                        />
+                        <div>
+                            Expiry date: {{ingredient['expiry_date']}}
+
+                        </div>
+                        
+                        <a href="/fridge/{{ingredient['id']}}">Show</a>
+                        <a href="/fridge/{{ingredient['id']}}/edit">Edit</a>
+                        
+                    </div>
+                </div>
+                {% endfor %}
+                <br>
+                <input class="btn btn-primary" type="submit" value="Submit" />
+            </form>
+            </div>
+        </div>
+        <div class="col-sm-8">
+        <section class="receipes">
+        <h3>Recipe</h3>
+        <div>{{url}}</div>
+        <div>{{recipe_image_url}}</div>
+
+        <div>
+            {{recipe_name1}}
+
+            <img width="200" src="{{recipe_image_url1}}" alt="" />
+        </div>
+        <div>
+            {{recipe_name2}}
+            <img width="200" src="{{recipe_image_url2}}" alt="" />
+        </div>
+        <div>
+            {{recipe_name3}}
+            <img width="200" src="{{recipe_image_url3}}" alt="" />
+        </div>
+    </section>
+    </div>
+        </div>
+    </section>
+    <section class="bin_items">
+        <h3>They are expired!</h3>
+
+        {#bin_items#} {% for waste in bin_items %}
         <div class="fridge-items">
             <div class="info">
-                <h2>{{ ingredient['name'] }}</h2>
+                <h2>{{ waste['name'] }}</h2>
 
-                <input
-                    type="checkbox"
-                    id="id_{{ ingredient['name'] }}"
-                    name="selected_ingredients"
-                    value="{{ ingredient['name'] }}"
-                />
-                <label for="{{ ingredient['name'] }}">
-                    Select this ingredient</label
-                ><br />
-                <img width="100" src="{{ingredient['image_url']}}" alt="" />
-                <a href="/fridge/{{ingredient['id']}}">Show</a>
-                <a href="/fridge/{{ingredient['id']}}/edit">Edit</a>
+                <a href="/fridge/{{waste['id']}}">Show</a>
+                <a href="/fridge/{{waste['id']}}/edit">Edit</a>
             </div>
         </div>
         {% endfor %}
-        <input type="submit" value="Submit" />
-    </form>
-</section>
-<section class="bin_items">
-    <h3>They are expired!</h3>
-
-    {#bin_items#} {% for waste in bin_items %}
-    <div class="fridge-items">
-        <div class="info">
-            <h2>{{ waste['name'] }}</h2>
-
-            <a href="/fridge/{{waste['id']}}">Show</a>
-            <a href="/fridge/{{waste['id']}}/edit">Edit</a>
-        </div>
-    </div>
-    {% endfor %}
-</section>
-<section class="receipes">
-    <h3>Recipe</h3>
-    <div>{{url}}</div>
-    <div>{{recipe_image_url}}</div>
-
-    <div>
-        {{recipe_name1}}{{recipe_info['summary']}}
-        <a href="{{recipe_info['sourceUrl']}}">{{recipe_info['sourceUrl']}}</a>
-        <img width="100" src="{{recipe_image_url1}}" alt="" />
-    </div>
-    <div>
-        {{recipe_name2}}
-        <img width="100" src="{{recipe_image_url2}}" alt="" />
-    </div>
-    <div>
-        {{recipe_name3}}
-        <img width="100" src="{{recipe_image_url3}}" alt="" />
-    </div>
-</section>
+    </section>
+    
+</div>
 {% endblock %}

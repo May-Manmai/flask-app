@@ -16,6 +16,7 @@ def fridge():
     user_id = session.get("user_id")
     fridge_items = get_not_expired_ingredients(user_id)
     bin_items = get_expired_ingredients(user_id)
+
     # get image from selected ingredients
     checked_items = request.args.getlist("selected_ingredients")
     if not checked_items:
