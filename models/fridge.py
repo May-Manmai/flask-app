@@ -1,5 +1,5 @@
 from datetime import date
-from flask import session
+from flask import session, request
 
 import database
 # All Database functionality relating to our fridge
@@ -37,6 +37,7 @@ def get_all_ingredients():
     results = database.sql_select(
         "SELECT * FROM ingredients", [])
     return results
+
 
 # UPDATE INGREDIENTS IN DB
 
