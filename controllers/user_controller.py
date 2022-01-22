@@ -18,7 +18,7 @@ def create_user():
     password = request.form.get('password')
     user = get_user_by_email(email)
     if user:
-        return redirect('/signup?error=username+already+exist')
+        return redirect('/signup?error=email+already+exist')
 
     insert_user(name, email, password)
 
