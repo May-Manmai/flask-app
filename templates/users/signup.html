@@ -3,6 +3,9 @@
 <div className="signup-login">
     <form action="/users" method="POST">
         <h2>Sign up</h2>
+        {% if error %}
+        <div class="error">{{error}}</div>
+        {% endif %}
         <div>
             <div class="input-container">
                 <label for="name"></label>
