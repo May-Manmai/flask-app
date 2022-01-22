@@ -62,12 +62,25 @@
 {% endif %}
 {% if recipes and recipes|length > 0 %}
     {% for recipe in recipes %}
-        <div>
-            {{recipe["title"]}}
-            <a href="{{recipe['info']['sourceUrl']}}"><img width="200" src="{{recipe['image']}}" alt="" /></a>
-            
-        </div>
-    {% endfor %}  
+        
+        
+        <test>
+        <div class="card" style="width: 18rem;">
+        <div class="card-body">
+        <h5 class="card-title">{{recipe["title"]}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+        <a href="{{recipe['info']['sourceUrl']}}"><img width="200" src="{{recipe['image']}}" alt="" /></a>
+        
+        <p class="card-text">{{recipe['info']['summary']|safe}}</p>
+        <a href="{{recipe['info']['sourceUrl']}}" class="card-link">Full recipe here</a>
+        
+  </div>
+</div>
+    </test>
+    {% endfor %}
+    
+
+  
 {% else %}
     <p>No recipe found</p>
 {% endif %}

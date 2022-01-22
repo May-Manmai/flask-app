@@ -35,6 +35,8 @@ def fridge():
         recipe_response = requests.get(info_url)
         recipe_info = recipe_response.json()
         recipe["info"] = recipe_info
+        
+        
 
     # source_id = source_info["results"][0]["id"]
     # recipe_name1 = source_info["results"][0]["title"]
