@@ -55,22 +55,24 @@
         <div class="col-sm-8">
         <section class="receipes">
         <h3>Recipe</h3>
-        <div>{{url}}</div>
-        <div>{{recipe_image_url}}</div>
-
+        {% if recipe_info %}
+    <div>
+        {{ recipe_info }}
+    </div>
+{% endif %}
+{% if recipes and recipes|length > 0 %}
+    {% for recipe in recipes %}
         <div>
-            {{recipe_name1}}
-
-            <img width="200" src="{{recipe_image_url1}}" alt="" />
+            {{recipe["title"]}}
+            <a href="{{recipe['info']['sourceUrl']}}"><img width="200" src="{{recipe['image']}}" alt="" /></a>
+            
         </div>
-        <div>
-            {{recipe_name2}}
-            <img width="200" src="{{recipe_image_url2}}" alt="" />
-        </div>
-        <div>
-            {{recipe_name3}}
-            <img width="200" src="{{recipe_image_url3}}" alt="" />
-        </div>
+    {% endfor %}  
+{% else %}
+    <p>No recipe found</p>
+{% endif %}
+       
+     
     </section>
     </div>
         </div>

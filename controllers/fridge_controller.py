@@ -26,19 +26,31 @@ def fridge():
     url = f'https://api.spoonacular.com/recipes/complexSearch?query={listToStr}&number=3&apiKey={SPOONACULAR_KEY}'
     source_response = requests.get(url)
     source_info = source_response.json()
-    recipe_name1 = source_info["results"][0]["title"]
-    recipe_image_url1 = source_info["results"][0]["image"]
-    recipe_name2 = source_info["results"][1]["title"]
-    recipe_image_url2 = source_info["results"][1]["image"]
-    recipe_name3 = source_info["results"][2]["title"]
-    recipe_image_url3 = source_info["results"][2]["image"]
-    #
-    source_id = source_info["results"][0]["id"]
-    url = f'https://api.spoonacular.com/recipes/{source_id}/information?apiKey={SPOONACULAR_KEY}'
-    recipe_response = requests.get(url)
-    recipe_info = recipe_response.json()
+    if not source_info["results"]:
+        return render_template('index.html', fridge_items=fridge_items, bin_items=bin_items)
+    recipes = source_info["results"][0:3]
+    for recipe in recipes:
+        source_id = recipe["id"]
+        info_url = f'https://api.spoonacular.com/recipes/{source_id}/information?apiKey={SPOONACULAR_KEY}'
+        recipe_response = requests.get(info_url)
+        recipe_info = recipe_response.json()
+        recipe["info"] = recipe_info
 
-    return render_template('index.html', fridge_items=fridge_items, bin_items=bin_items, url=url, recipe_name1=recipe_name1, recipe_name2=recipe_name2, recipe_name3=recipe_name3, recipe_image_url2=recipe_image_url2, recipe_image_url3=recipe_image_url3, recipe_image_url1=recipe_image_url1, recipe_info=recipe_info)
+    # source_id = source_info["results"][0]["id"]
+    # recipe_name1 = source_info["results"][0]["title"]
+    # recipe_image_url1 = source_info["results"][0]["image"]
+
+    # recipe_name2 = source_info["results"][1]["title"]
+    # recipe_image_url2 = source_info["results"][1]["image"]
+    # recipe_name3 = source_info["results"][2]["title"]
+    # recipe_image_url3 = source_info["results"][2]["image"]
+    # #
+
+    # url = f'https://api.spoonacular.com/recipes/{source_id}/information?apiKey={SPOONACULAR_KEY}'
+    # recipe_response = requests.get(url)
+    # recipe_info = recipe_response.json()
+
+    return render_template('index.html', fridge_items=fridge_items, bin_items=bin_items, url=url, recipes=recipes)
 
 
 @fridge_controller.route('/fridge/create', methods=["GET"])
