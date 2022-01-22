@@ -17,7 +17,7 @@
             crossorigin="anonymous"
         />
     </head>
-    <body>
+    <body id="body">
         <header>
             <h1>Your-Smart-Fridge</h1>
             <nav class="nav flex-column">
@@ -45,15 +45,17 @@
             </nav>
         </header>
         <main>{% block content %}{% endblock content%}</main>
+        <br />
+        <br />
         <footer>
-            <section>
-                <h4></h4>
-            </section>
-            <section>
-                <h4>Contact us</h4>
-                yoursmartfridge@info.io
-            </section>
-
+            <div class="card">
+                <div class="card-body">
+                    <section>
+                        <h4>Contact us</h4>
+                        yoursmartfridge@info.io
+                    </section>
+                </div>
+            </div>
             <div>© 2022</div>
         </footer>
     </body>

@@ -90,10 +90,13 @@
     </div>
         </div>
     </section>
-    <section class="bin_items">
-        <h3>They are expired!</h3>
 
+    {% if bin_items %}
+    <section class="bin_items">
+
+        <h3><i class="fa fa-frown-o" aria-hidden="true"></i> Oops! some items are expired!</h3>
         {#bin_items#} {% for waste in bin_items %}
+   
         <div class="fridge-items">
             <div class="info">
                 <h2>{{ waste['name'] }}</h2>
@@ -101,9 +104,14 @@
                 <a href="/fridge/{{waste['id']}}">Show</a>
                 <a href="/fridge/{{waste['id']}}/edit">Edit</a>
             </div>
+            <form action="/fridge/{{waste['id']}}/delete" method="POST">
+            <button class="btn btn-primary" type="submit">
+            <i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+</form>
         </div>
         {% endfor %}
     </section>
-    
+{% endif %}
+
 </div>
 {% endblock %}

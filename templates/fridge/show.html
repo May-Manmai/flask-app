@@ -3,9 +3,8 @@
 <div class="fridge-item">
     <div class="info">
         <h2>{{ ingredient['name'] }}</h2>
-        <div class="expiry_date">
-            Expiry date: {{ingredient['expiry_date']}}
-        </div>
+        <div>Purchased date: {{ingredient['purchased_date']}}</div>
+        <div>Expiry date: {{ingredient['expiry_date']}}</div>
 
         <a href="/fridge/{{ingredient['id']}}/edit">Edit</a>
     </div>

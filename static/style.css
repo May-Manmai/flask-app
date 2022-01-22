@@ -35,3 +35,11 @@
 .login-btn:hover {
     opacity: 1;
 }
+
+.bin_items {
+    margin-top: 20px;
+}
+
+#body {
+    margin: 20px;
+}
