@@ -4,7 +4,7 @@ https://your-smart-fridge.herokuapp.com/
 
 ## About
 
-This project is my second project to build Full-stack Application. Your-Smart-Fridge is an app to reduce food waste: suggest recipes to use up the food that is going bad!
+This project is my second project to build Full-stack Application. Your-Smart-Fridge is an app to reduce food waste: suggest recipes to use up the food that is going bad!!
 
 ---
 

@@ -11,6 +11,7 @@ create table ingredients (
     purchased_date date not null,
     expiry_date date not null, 
     name VARCHAR(100) not null,
+    image_url text not null,
     CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
