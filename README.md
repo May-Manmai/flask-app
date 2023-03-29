@@ -1,6 +1,6 @@
 # Smart Fridge Application
 
-https://your-smart-fridge.herokuapp.com/
+https://smart-fridge.onrender.com
 
 ## About
 
@@ -19,14 +19,19 @@ This project is my second project to build Full-stack Application. Your-Smart-Fr
 
 ---
 
-### installation instructions
+### Flask app requirements
 
----
-
-### unsolved problems
+gunicorn
+flask
+psycopg2
+bcrypt
+requests
 
 ---
 
 ### Try it out
+
+Email: test@test.com
+Password: testtest
 
 My hosted working app link is https://github.com/May-Manmai/smart-fridge.git
